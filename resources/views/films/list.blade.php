@@ -17,8 +17,10 @@
         @foreach($films as $film)
             <tr>
                 <td>{{$film['name']}}</td>
+                <td>{{$film['country']}}</td>
                 <td>{{$film['year']}}</td>
                 <td>{{$film['genre']}}</td>
+                <td>{{$film['duration']}}</td>
                 <td><img src={{$film['img_url']}} style="width: 100px; heigth: 120px;" /></td>
             </tr>
         @endforeach
