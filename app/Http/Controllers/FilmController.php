@@ -115,4 +115,19 @@ class FilmController extends Controller
             "title" => $title
         ]);
     }
+
+    public function sortFilms(){
+        $films_filtered = [];
+
+        $title = "Listado de todas las pelis";
+        $films = FilmController::readFilms();
+
+        array_multisort(array_column($films, "year"), SORT_DESC, $films);
+
+        foreach ($films as $film) {
+            $films_filtered[] = $film;
+        }
+
+        return view("films.list", ["films" => $films_filtered, "title" => $title]);
+    }
 }
