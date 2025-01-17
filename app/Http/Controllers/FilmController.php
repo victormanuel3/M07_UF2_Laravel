@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Film;
-use Illuminate\Support\Facades\Storage;
+use Exception;
+use Illuminate\Http\Request;
 
 class FilmController extends Controller
 {
@@ -94,9 +95,48 @@ class FilmController extends Controller
         return view("films.counter", ["count" => $films, "title" => $title]);
     }
 
-    public function createFilm() {
-        Film::create([
+
+    public function createFilm(Request $request) {
+        try {
+            $request->validate([
+                'name' => 'required|string',
+                'year' => 'required|integer|min:1700|max:2025',
+                'genre' => 'required|string',
+                'country' => 'required|string',
+                'duration' => 'required|numeric|min:40|max:300',
+                'img_url' => 'required|string',
+            ]);
+
+            $film = new Film();
+            if ($film->isFilm($request->name)){
+                return back()->withErrors(['name' => 'La película ya existe.']);
+            }
+
+            // Crear el film utilizando directamente el request
+            Film::create([
+                'name' => $request->name,
+                'year' => $request->year,
+                'genre' => $request->genre,
+                'country' => $request->country,
+                'duration' => $request->duration,
+                'img_url' => $request->img_url,
+            ]);
             
-        ]);
+            session()->flash('success', 'Película creada exitosamente.');
+
+            return $this->listFilms();
+        }catch (Exception $e) {
+            session()->flash('error', 'Hubo un problema al crear la película: ' . $e->getMessage());
+        }
+    }
+
+    function deleteFilm($id = null) {
+        $film = Film::find($id);
+        $film->delete();
+        $this->listFilms();
+    }
+
+    function updateFilm() {
+
     }
 }

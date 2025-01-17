@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Film extends Model
 {
+    public $timestamps = false;
+
     use HasFactory;
     protected $fillable = [
         'name',
@@ -16,4 +18,8 @@ class Film extends Model
         'duration',
         'img_url'
     ];
+
+    public function isFilm($title) {
+        return Film::where('name', $title)->exists();
+    }
 }

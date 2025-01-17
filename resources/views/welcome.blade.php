@@ -8,15 +8,36 @@
             <li><a href=/filmout/sortFilms>Pelis ordenadas descendentemente por año</a></li>
             <li><a href=/filmout/countFilms>Contador de Pelis</a></li>
         </ul>
-        <h1 class="mt-4">Añadir película</h1>
-        <form action={{route('createPelicula')}} action="post">
-            <input type="text" placeholder="Nombre">
-            <input type="number" placeholder="Year" min="1800">
-            <input type="text" placeholder="Genero">
-            <input type="text" placeholder="Pais">
-            <input type="number" placeholder="Duracion" min="30">
-            <input type="url" placeholder="Image_URL">
-            <button type="submit">Crear</button>
-        </form>
+        <div>
+
+            <h1 class="mt-4">Añadir película</h1>
+            <form action={{route('createFilm')}} method="post">
+                @if(session('success') || session('error'))
+                    <div class="alert {{ session('success') ? 'alert-success' : 'alert-danger' }}">
+                        {{ session('success') ?? session('error') }}
+                    </div>
+                @endif
+                @csrf
+                <input type="text" name="name" placeholder="Nombre">
+                @error('name') <p>{{$message}}</p> @enderror
+    
+                <input type="number" name="year" placeholder="Year" min="1800">
+                @error('year') <p>{{$message}}</p> @enderror
+    
+                <input type="text" name="genre" placeholder="Genero">
+                @error('genre') <p>{{$message}}</p> @enderror
+    
+                <input type="text" name="country" placeholder="Pais">
+                @error('country') <p>{{$message}}</p> @enderror
+    
+                <input type="number" name="duration" placeholder="Duracion" min="30">
+                @error('duration') <p>{{$message}}</p> @enderror
+    
+                <input type="text" name="img_url" placeholder="Image_URL">
+                @error('img_url') <p>{{$message}}</p> @enderror
+    
+                <button type="submit">Crear</button>
+            </form>
+        </div>
     </div>
 </x-app-layout>

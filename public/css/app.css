@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Estilos generales del body */
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+/* Header */
+.header {
+    background-color: #003366; /* Azul oscuro */
+    color: white;
+    padding: 20px 40px; /* Espaciado para el header */
+    display: flex;
+    justify-content: center; /* Centra el logo */
+    align-items: center;
+    border-bottom: 4px solid #ffcc00; /* Borde inferior amarillo */
+}
+
+/* Logo (Título) */
+.header .logo {
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 311px;
+}
+
+/* Footer */
+.footer {
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #1e1e1e;
+    padding: 20px 10px; /* Espaciado interno */
+    text-align: center;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px; /* Espacio entre elementos */
+}
+
+.footer-title h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff; /* Texto blanco */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.footer-support p {
+    margin: 5px 0;
+    color: #aaaaaa; /* Gris claro */
+    font-size: 14px;
+}
+
+.footer-support p:last-child {
+    font-style: italic; /* Estilo cursiva para la última línea */
+    color: #cccccc; /* Gris más claro */
+}
+.content-wrapper {
+    padding-bottom: 200px; /* Ajusta este valor según la altura de tu footer */
+}
