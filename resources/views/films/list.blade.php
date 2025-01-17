@@ -26,7 +26,13 @@
             @foreach($films as $film)
                 <tr>
                     <td>
-                        <a href={{route("deleteFilm", ['id' => $film->id])}}><i class="fa-sharp fa-solid fa-trash"></i></a>
+                        <form action={{route("deleteFilm", ['id' => $film->id])}} method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">
+                                <i class="fa-sharp fa-solid fa-trash"></i>
+                            </button>
+                        </form>
                         {{-- <a href={{route("")}}><i class="fa-sharp fa-solid fa-pen"></i></a> --}}
                     </td>
                     <td>{{$film->name}}</td>

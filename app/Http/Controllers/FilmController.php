@@ -133,7 +133,7 @@ class FilmController extends Controller
     function deleteFilm($id = null) {
         $film = Film::find($id);
         $film->delete();
-        $this->listFilms();
+        return $this->listFilms();
     }
 
     function updateFilm() {
