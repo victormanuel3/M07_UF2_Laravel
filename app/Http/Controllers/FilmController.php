@@ -136,7 +136,11 @@ class FilmController extends Controller
         return $this->listFilms();
     }
 
-    function updateFilm() {
+    function updateFilm($id = null, Request $request) {
+        $film = Film::find($id);
 
+        $film->save([
+            'name' => $request->name
+        ]);
     }
 }

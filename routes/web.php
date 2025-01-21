@@ -29,11 +29,13 @@ Route::middleware('year')->group(function() {
         Route::get('films',[FilmController::class, "listFilms"])->name('listFilms');
         Route::get('sortFilms',[FilmController::class, "sortFilms"])->name('sortFilms');
         Route::get('countFilms',[FilmController::class, "countFilms"])->name('countFilms');
+    });
+});
+Route::middleware('validate.url')->group(function () {
+    Route::group(['prefix' => 'filmin'], routes: function () {
+        Route::put('updateFilm/{id}', [FilmController::class, 'updateFilm'])->name('updateFilm');
+        Route::post('createFilm', [FilmController::class, 'createFilm'])->name('createFilm');
         Route::delete('deleteFilm/{id}', [FilmController::class, 'deleteFilm'])->name('deleteFilm');
-        Route::middleware('validate.url')->group(function () {
-            Route::put('updateFilm', [FilmController::class, 'updateFilm'])->name('updateFilm');
-            Route::post('createFilm',[FilmController::class, "createFilm"])->prefix('filmin')->name('createFilm');
-        });
     });
 });
 
