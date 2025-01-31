@@ -1,16 +1,19 @@
 <x-app-layout>
     <h1>{{$title}}</h1>
 
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{session('success')}}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    @if(session()->has('success') || session()->has('error'))
+        <div class="alert {{ session()->has('success') ? 'alert-success' : 'alert-danger' }} alert-dismissible fade show" role="alert">
+            <strong>{{ session('success') ?? session('error') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
 
-    @if(empty($films))
-    <p COLOR="red">No se ha encontrado ninguna película</p>
+    @if(count($films) == 0)
+        <span>No se ha encontrado ninguna película</span>
     @else
+    
     <div align="center">
         <table border="1" >
             <tr>
@@ -30,14 +33,10 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit">
-                                <i class="fa-sharp fa-solid fa-
-                                trash"></i>
+                                <i class="fa-sharp fa-solid fa-trash"></i>
                             </button>
                         </form>
-                        {{-- <a href={{route("")}}><i class="fa-sharp fa-solid fa-pen"></i></a> --}}
-                        <form action={{route('updateFilm', ['id' => $film->id])}} method="post">
-                            @csrf
-                            @method()
+                        <form action={{route('showUpdateForm', ['id' => $film->id])}} method="get">
                             <button>
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>

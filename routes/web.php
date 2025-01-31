@@ -33,8 +33,10 @@ Route::middleware('year')->group(function() {
 });
 Route::middleware('validate.url')->group(function () {
     Route::group(['prefix' => 'filmin'], routes: function () {
-        Route::put('updateFilm/{id}', [FilmController::class, 'updateFilm'])->name('updateFilm');
+        Route::get('FilmForm', [FilmController::class, 'showFilmForm'])->name('filmForm');
         Route::post('createFilm', [FilmController::class, 'createFilm'])->name('createFilm');
+        Route::get('filmUpdateForm/{id}', [FilmController::class, 'showUpdateForm'])->name('showUpdateForm');
+        Route::put('updateFilm/{id}', [FilmController::class, 'updateFilm'])->name('updateFilm');
         Route::delete('deleteFilm/{id}', [FilmController::class, 'deleteFilm'])->name('deleteFilm');
     });
 });

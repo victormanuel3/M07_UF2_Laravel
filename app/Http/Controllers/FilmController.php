@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Film;
-use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class FilmController extends Controller
 {
@@ -96,6 +98,13 @@ class FilmController extends Controller
     }
 
 
+    public function showUpdateForm($id = null) {
+        $film = Film::findOrFail($id);
+        return view('films.create-film', ['film' => $film]);
+    }
+    public function showFilmForm() {
+        return view('films.create-film');
+    }
     public function createFilm(Request $request) {
         try {
             $request->validate([
@@ -121,26 +130,49 @@ class FilmController extends Controller
                 'duration' => $request->duration,
                 'img_url' => $request->img_url,
             ]);
-            
+            Log::info("La película " . $film->name . " ha sido creada.");
             session()->flash('success', 'Película creada exitosamente.');
-
             return $this->listFilms();
-        }catch (Exception $e) {
+        }catch (QueryException $e) {
+            Log::error("Ha ocurrido un error en el create ".$e->getMessage());
             session()->flash('error', 'Hubo un problema al crear la película: ' . $e->getMessage());
         }
     }
 
-    function deleteFilm($id = null) {
-        $film = Film::find($id);
-        $film->delete();
-        return $this->listFilms();
+    public function deleteFilm($id = null) {
+        try {
+            $film = Film::find($id);
+            $film->delete();
+            Log::info("El delete de la película ".$film->name." ha sido exitoso.");
+            return redirect()->route('listFilms');
+        }catch(QueryException $e) {
+            Log::error("Error a la hora de realizar un delete ".$e->getMessage());
+        }
     }
 
-    function updateFilm($id = null, Request $request) {
-        $film = Film::find($id);
+    public function updateFilm($id = null, Request $request) {
+        try {
+            $film = Film::findOrFail($id);
+            $validated = $request->validate([
+                'name' => 'required|string',
+                'year' => 'required|integer|min:1700|max:2025',
+                'genre' => 'required|string',
+                'country' => 'required|string',
+                'duration' => 'required|numeric|min:40|max:300',
+                'img_url' => 'required|string',
+            ]);
+            
+            if ($film->isFilm($request->name)){
+                return back()->withErrors(['name' => 'La película ya existe.']);
+            }
 
-        $film->save([
-            'name' => $request->name
-        ]);
+            $film->update($validated);
+
+            Log::info("La película ".$film->name." ha sido modificada.");
+            return redirect()->route('listFilms')->with('success', 'La película ha sido actualizada correctamente.');
+        }catch (QueryException $e) {
+            Log::error("El update de la película ha fallado " . $e);
+            session()->flash('error', 'Hubo un problema al crear la película: ' . $e->getMessage());
+        }
     }
 }
