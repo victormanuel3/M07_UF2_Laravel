@@ -10,4 +10,5 @@
             <li><a href={{Route('countFilms')}}>Contador de Pelis</a></li>
         </ul>
     </div>
+    <img class="image" src="/img/filmopedia.png" alt="filmopedia">
 </x-app-layout>

@@ -1,48 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@font-face {
+    font-family: 'Mensura';
+    src: url(../fonts/Mensura\ Black.ttf);
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Inter", serif;
 }
-/* Estilos generales del body */
+
 body,
 html {
     width: 100%;
     height: 100%;
 }
-/* Header */
 .header {
-    background-color: #003366; /* Azul oscuro */
+    background-color: #003366;
     color: white;
-    padding: 20px 40px; /* Espaciado para el header */
+    padding: 20px 40px;
     display: flex;
-    justify-content: center; /* Centra el logo */
+    justify-content: center; 
     align-items: center;
-    border-bottom: 4px solid #ffcc00; /* Borde inferior amarillo */
+    position: relative;
+    font-style: italic;
+    border-bottom: 5px solid rgb(255 226 0); 
 }
 
-/* Logo (Título) */
 .header .logo {
     font-size: 36px;
-    font-weight: bold;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Mensura';
 }
-/* Form */
 form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
     width: 311px;
 }
+form > button {
+    margin-top: 8px;
+}
 
-/* Footer */
 .footer {
     font-family: Arial, sans-serif;
     color: #fff;
     background-color: #1e1e1e;
-    padding: 20px 10px; /* Espaciado interno */
+    padding: 20px 10px; 
     text-align: center;
     font-size: 14px;
     position: fixed;
@@ -54,13 +60,13 @@ form {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 8px; /* Espacio entre elementos */
+    gap: 8px;
 }
 
 .footer-title h2 {
     font-size: 22px;
     font-weight: bold;
-    color: #ffffff; /* Texto blanco */
+    color: #ffffff; 
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 5px;
@@ -68,14 +74,124 @@ form {
 
 .footer-support p {
     margin: 5px 0;
-    color: #aaaaaa; /* Gris claro */
+    color: #aaaaaa; 
     font-size: 14px;
 }
 
 .footer-support p:last-child {
-    font-style: italic; /* Estilo cursiva para la última línea */
-    color: #cccccc; /* Gris más claro */
+    font-style: italic; 
+    color: #cccccc; 
 }
 .content-wrapper {
-    padding-bottom: 200px; /* Ajusta este valor según la altura de tu footer */
+    padding-bottom: 200px; 
+    position: relative;
+}
+
+td, th {
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px;
+}
+
+
+td img {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 120px;
+    object-fit: cover; 
+}
+.buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
+}
+
+.buttons form {
+    display: flex; 
+    align-items: center; 
+    width: fit-content;
+}
+th, td  {
+    border: 1px solid black;
+}
+
+.buttons button {
+    padding: 8px;
+    border: 1px solid red;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+td.buttons {
+    padding: 0;
+    white-space: nowrap;
+}
+.buttons button:first-child {
+    border: 1px solid green;
+}
+.buttons button:last-child > i {
+    color: red;
+}
+.buttons button:first-child > i {
+    color: green;
+}
+.error {
+    color: red;
+    margin: 2px 0px;
+}
+input {
+    margin: 8px 0px;    
+}
+.container-alerta {
+    padding: 0px 305px;
+}
+.back-home {
+    position: absolute;
+    right: 22px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.back-home > i {
+    font-size: 20px;
+}
+.counter-info p {
+    font-size: 30px;
+    font-weight: 400;
+}
+.counter-info {
+    text-align: center;
+    margin-top: 30px;
+}
+.not-found {
+    font-size: 25px;
+    text-align: center;
+    display: block;
+}
+.image {
+    width: 400px;
+    height: 100%;
+    position: absolute;
+    right: 119px;
+    top: 0;
+}
+.container-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container-form input {
+    padding: 7px 2px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    outline: none;
 }

@@ -15,7 +15,7 @@ class validateUrl
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->isMethod('post')) {
+        if ($request->isMethod('post')  || $request->isMethod('put')) {
             // Validar solo si la solicitud es POST
             $imageURL = $request->img_url;
     
